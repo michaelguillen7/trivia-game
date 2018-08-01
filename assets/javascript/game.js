@@ -36,3 +36,29 @@ var trivia = {
       $(".timer").html(trivia.timeCounter);
     }
   };
+
+  function wait(){
+    if(trivia.questionCounter < 4) {
+      trivia.questionCounter ++;
+      generateHTML();
+      trivia.timeCounter = 20;
+      timer();
+    }
+    else {
+      finalScreen();
+    }
+  };
+  
+  function win(){
+    trivia.correctCounter ++;
+    trivia.gameHTML = "<p class='text-center'> Time Remaining: <span class='timer'>" + trivia.timeCounter + "</span></p>" + "<p class='text-center'>Correct! The answer is: " + trivia.correctAnswers[trivia.questionCounter] + "</p>" + trivia.imageArray[trivia.questionCounter];
+    $(".main-area").html(trivia.gameHTML);
+    setTimeout(wait, 4000);
+  };
+  
+  function loss(){
+    trivia.inCorrectCounter ++;
+    trivia.gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + trivia.timeCounter + "</span></p>" + "<p class='text-center'>Wrong! The correct answer is: "+ trivia.correctAnswers[trivia.questionCounter] + "</p>" + trivia.imageArray[trivia.questionCounter];
+      $(".main-area").html(trivia.gameHTML);
+      setTimeout(wait, 4000);
+  };

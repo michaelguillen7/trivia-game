@@ -89,3 +89,36 @@ var trivia = {
     trivia.gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>20</span></p><p class='text-center'>" + trivia.questionsArray[trivia.questionCounter] + "</p><button class='first-answer answer'>A. " + trivia.answerArray[trivia.questionCounter][0] + "</button><br><button class='answer'>B. "+trivia.answerArray[trivia.questionCounter][1]+"</button><br><button class='answer'>C. "+trivia.answerArray[trivia.questionCounter][2]+"</button><br><button class='answer'>D. "+trivia.answerArray[trivia.questionCounter][3]+"</button>";
     $(".main-area").html(trivia.gameHTML);
   }
+
+  startScreen();
+
+$("body").on("click", ".start-button", function(event){
+	event.preventDefault();
+	trivia.clickSound.play();
+	generateHTML();
+
+	timer();
+}); 
+
+$("body").on("click", ".answer", function(event){
+	trivia.clickSound.play();
+  selectedAnswer = $(this).text();
+  
+  if(selectedAnswer === trivia.correctAnswers[trivia.questionCounter]) {
+
+		clearInterval(trivia.clock);
+		win();
+	}
+
+	else {
+
+		clearInterval(trivia.clock);
+		loss();
+	}
+}); 
+
+
+$("body").on("click", ".reset-button", function(event){
+	trivia.clickSound.play();
+	resetGame();
+}); 

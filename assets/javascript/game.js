@@ -62,3 +62,30 @@ var trivia = {
       $(".main-area").html(trivia.gameHTML);
       setTimeout(wait, 4000);
   };
+
+  function timeOutLoss(){
+    trivia.unAnsweredCounter ++;
+    trivia.gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + trivia.timeCounter + "</span></p>" + "<p class='text-center'>You ran out of time!  The correct answer was: " + trivia.correctAnswers[trivia.questionCounter] + "</p>" + trivia.imageArray[trivia.questionCounter];
+    $(".main-area").html(trivia.gameHTML);
+    setTimeout(wait, 4000);
+  };
+  
+  function finalScreen(){
+    trivia.gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>" + trivia.timeCounter + "</span></p>" + "<p class='text-center'>All done, here's how you did!" + "</p>" + "<p class='summary-correct'>Correct Answers: " + trivia.correctCounter + "</p>" + "<p>Wrong Answers: " + trivia.inCorrectCounter + "</p>" + "<p>Unanswered: " + trivia.unAnsweredCounter + "</p>" + "<p class='text-center reset-button-container'><a class='btn btn-primary btn-lg btn-block reset-button' href='#' role='button'>Reset The Quiz!</a></p>";
+    $(".main-area").html(trivia.gameHTML);
+  };
+  
+  function resetGame(){
+    trivia.questionCounter = 0;
+    trivia.correctCounter = 0;
+    trivia.inCorrectCounter = 0;
+    trivia.unAnsweredCounter = 0;
+    trivia.timeCounter = 20;
+    generateHTML();
+    timer();
+  };
+
+  function generateHTML(){
+    trivia.gameHTML = "<p class='text-center timer-p'>Time Remaining: <span class='timer'>20</span></p><p class='text-center'>" + trivia.questionsArray[trivia.questionCounter] + "</p><button class='first-answer answer'>A. " + trivia.answerArray[trivia.questionCounter][0] + "</button><br><button class='answer'>B. "+trivia.answerArray[trivia.questionCounter][1]+"</button><br><button class='answer'>C. "+trivia.answerArray[trivia.questionCounter][2]+"</button><br><button class='answer'>D. "+trivia.answerArray[trivia.questionCounter][3]+"</button>";
+    $(".main-area").html(trivia.gameHTML);
+  }
